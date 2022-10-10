@@ -36,10 +36,19 @@ class UserController {
         return res.status(400).json({message: 'Invalid password'});
       }
       const token = generateAccessToken(user.id);
-      return res.json({token, message: 'User login successfully'});
+      return res.json({token, user, message: 'User login successfully'});
     }
     catch(err) {
       return res.status(400).json({message: 'Login error'});
+    }
+  }
+
+  async checkAuth(req, res) {
+    try {
+      return res.json({message: 'User is authorized'});
+    }
+    catch(err) {
+      return res.status(400).json({message: 'Unknown check error'});
     }
   }
 
@@ -49,7 +58,7 @@ class UserController {
       return res.json({user: user, message: 'User updated successfully'});
     }
     catch(err) {
-      return res.status(400).json({message: 'Unknown error'});
+      return res.status(400).json({message: 'Unknown update error'});
     }
   }
 
@@ -59,7 +68,7 @@ class UserController {
       return res.json(user);
     }
     catch(err) {
-      return res.status(400).json({message: 'Unknown error'});
+      return res.status(400).json({message: 'Unknown delete error'});
     }
   }
 }

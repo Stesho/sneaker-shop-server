@@ -18,6 +18,14 @@ class UserService {
     return user.rows[0];
   }
 
+  async getUserById(id) {
+    const user = await db.query(
+      'SELECT * FROM account WHERE id = $1',
+      [id]
+    );
+    return user.rows[0];
+  }
+
   async updateUser(id, user) {
     const {name, surname, email, password} = user;
     const updatedUser = await db.query(
