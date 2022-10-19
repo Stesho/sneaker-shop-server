@@ -6,7 +6,6 @@ class ProductController {
   async createProduct(req, res) {
     try {
       const product = await productService.createProduct(req.body);
-      console.log(product);
       return res.json({product, message: 'New product created'});
     }
     catch(err) {
